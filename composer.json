@@ -1,5 +1,9 @@
 {
     "require": {
+        "php": ">=5.4",
         "guzzlehttp/guzzle": "^6.2"
+    },
+    "suggest": {
+        "ext-curl": "Guzzle would use cURL only if it's available"
     }
 }
