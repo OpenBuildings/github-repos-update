@@ -1,8 +1,10 @@
 #!/usr/bin/env php
 <?php
 
+namespace Clippings;
+
 if (!isset($argv[1])) {
-    throw new InvalidArgumentException('You must provide text for updating as 1st argument');
+    throw new \InvalidArgumentException('You must provide text for updating as 1st argument');
 }
 
 $text = $argv[1];

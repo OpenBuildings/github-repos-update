@@ -1,12 +1,14 @@
 #!/usr/bin/env php
 <?php
 
+namespace Clippings;
+
 require_once __DIR__.'/vendor/autoload.php';
 
 $client = new \GuzzleHttp\Client();
 
 if (!isset($argv[1])) {
-    throw new InvalidArgumentException('You must provide GitHub organisation name as 1st argument');
+    throw new \InvalidArgumentException('You must provide GitHub organisation name as 1st argument');
 }
 
 $org = $argv[1];
