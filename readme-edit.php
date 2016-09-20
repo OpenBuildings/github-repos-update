@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 $hiring = '> We at [Clippings](https://clippings.com) are always hiring! If you like this you could read more about [working at Clippings.com](https://clippings.github.io/working-at-clippings) or [contact us](mailto:jobs@clippings.com?subject=Working%20at%20Clippings).';
