@@ -1,7 +1,11 @@
 #!/usr/bin/env php
 <?php
 
-$hiring = '> We at [Clippings](https://clippings.com) are always hiring! If you like this you could read more about [working at Clippings.com](https://clippings.github.io/working-at-clippings) or [contact us](mailto:jobs@clippings.com?subject=Working%20at%20Clippings).';
+if (!isset($argv[1])) {
+    throw new InvalidArgumentException('You must provide text for updating as 1st argument');
+}
+
+$text = $argv[1];
 
 $dirs = array_filter(
     array_filter(glob('*'), 'is_dir'),
@@ -15,7 +19,7 @@ $dirsHavingReademe = array_filter($dirs, function($dir) {
 
 function editFiles() {
     global $dirsHavingReademe;
-    global $hiring;
+    global $text;
 
     $files = array_map(function ($dir) {
         return './'.$dir.'/README.md';
@@ -25,7 +29,7 @@ function editFiles() {
         $fhandle = fopen($fname,"r");
         $content = fread($fhandle,filesize($fname));
 
-        $content = preg_replace("/((?<=\# )([a-zA-Z0-9\-_:\[!\]\(\)\/\.\?\= ]+))|(([a-zA-Z0-9\-_:\[!\]\(\)\/\.\?\= ]+)(\n[=|-]{2,}))/", "$0\n$hiring", $content, 1);
+        $content = preg_replace("/((?<=\# )([a-zA-Z0-9\-_:\[!\]\(\)\/\.\?\= ]+))|(([a-zA-Z0-9\-_:\[!\]\(\)\/\.\?\= ]+)(\n[=|-]{2,}))/", "$0\n$text", $content, 1);
 
         echo "Editing: $fname".PHP_EOL;
 
