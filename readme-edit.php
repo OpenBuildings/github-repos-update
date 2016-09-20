@@ -15,17 +15,17 @@ $dirs = array_filter(
         return $dir != 'vendor';
     });
 
-$dirsHavingReademe = array_filter($dirs, function($dir) {
+$dirsHavingReadme = array_filter($dirs, function($dir) {
     return file_exists('./'.$dir.'/README.md');
 });
 
 function editFiles() {
-    global $dirsHavingReademe;
+    global $dirsHavingReadme;
     global $text;
 
     $files = array_map(function ($dir) {
         return './'.$dir.'/README.md';
-    }, $dirsHavingReademe);
+    }, $dirsHavingReadme);
 
     foreach ($files as $fname) {
         $fhandle = fopen($fname,"r");
@@ -42,28 +42,28 @@ function editFiles() {
 }
 
 function revert() {
-    global $dirsHavingReademe;
+    global $dirsHavingReadme;
 
-    foreach ($dirsHavingReademe as $dir) {
+    foreach ($dirsHavingReadme as $dir) {
         exec('cd '.$dir.'/; git checkout .; cd ..;');
     }
 }
 
 function getDiffs() {
-    global $dirsHavingReademe;
+    global $dirsHavingReadme;
 
     exec('cp /dev/null dif.txt');
-    foreach ($dirsHavingReademe as $dir) {
+    foreach ($dirsHavingReadme as $dir) {
         exec('cd '.$dir.'/; git diff >> ../dif.txt; cd ..;');
     }
 }
 
 function pushChanges() {
-    global $dirsHavingReademe;
+    global $dirsHavingReadme;
     global $argv;
 
     if (isset($argv[1]) and $argv[1] == '--push') {
-        foreach ($dirsHavingReademe as $dir) {
+        foreach ($dirsHavingReadme as $dir) {
             exec('cd '.$dir.'/; git commit -am\'Add we are hiring quote\'; git push origin\master;');
         }
     }
